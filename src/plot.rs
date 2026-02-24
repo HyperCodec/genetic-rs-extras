@@ -21,15 +21,16 @@ pub struct FitnessHistory {
 impl FitnessHistory {
     /// Plots the fitness history using the provided [`DrawingBackend`].
     /// This will plot the highest, median, and lowest fitness values for each generation.
-    pub fn plot<'a, DB: DrawingBackend>(&self, root: &'a DrawingArea<DB, Shift>) -> Result<ChartContext<'a, DB, Cartesian2d<RangedCoordusize, RangedCoordf32>>, DrawingAreaErrorKind<DB::ErrorType>> {
-        let max_highest = self.highest.iter().cloned().fold(f32::NEG_INFINITY, f32::max);
+    pub fn plot<'a, DB: DrawingBackend>(&self, root: &'a DrawingArea<DB, Shift>) ->
+    Result<ChartContext<'a, DB, Cartesian2d<RangedCoordusize, RangedCoordf32>>, DrawingAreaErrorKind<DB::ErrorType>> {
+        let max = self.highest.iter().cloned().fold(f32::NEG_INFINITY, f32::max);
         
         let mut chart = ChartBuilder::on(root)
             .caption("fitness values per generation", ("sans-serif", 50).into_font())
             .margin(20)
             .x_label_area_size(50)
             .y_label_area_size(30)
-            .build_cartesian_2d(0usize..self.highest.len(), 0f32..max_highest)?;
+            .build_cartesian_2d(0usize..self.highest.len(), 0f32..max)?;
         
         chart.configure_mesh().draw()?;
 
