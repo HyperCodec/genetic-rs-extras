@@ -8,6 +8,11 @@ default = []
 plotters = ["dep:plotters"]
 indicatif = ["dep:indicatif"]
 
+[[example]]
+name = "all"
+path = "examples/all.rs"
+required-features = ["genetic-rs/derive"]
+
 [dependencies]
 genetic-rs = "1.2.2"
 indicatif = { version = "0.18.4", optional = true }

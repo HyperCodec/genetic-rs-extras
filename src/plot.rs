@@ -22,7 +22,11 @@ impl FitnessHistory {
     /// Plots the fitness history using the provided [`DrawingBackend`].
     /// This will plot the highest, median, and lowest fitness values for each generation.
     pub fn plot<'a, DB: DrawingBackend>(&self, root: &'a DrawingArea<DB, Shift>) ->
-    Result<ChartContext<'a, DB, Cartesian2d<RangedCoordusize, RangedCoordf32>>, DrawingAreaErrorKind<DB::ErrorType>> {
+        Result<
+            ChartContext<'a, DB, Cartesian2d<RangedCoordusize, RangedCoordf32>>,
+            DrawingAreaErrorKind<DB::ErrorType>
+        >
+    {
         let max = self.highest.iter().cloned().fold(f32::NEG_INFINITY, f32::max);
         
         let mut chart = ChartBuilder::on(root)
@@ -55,6 +59,12 @@ impl FitnessHistory {
             ))?
             .label("lowest");
 
+        chart
+            .configure_series_labels()
+            .background_style(&WHITE.mix(0.8))
+            .border_style(&BLACK)
+            .draw()?;
+
         Ok(chart)
     }
 }
@@ -75,7 +85,12 @@ impl FitnessPlotter {
     }
 
     /// Plots the fitness history using the provided [`DrawingBackend`].
-    pub fn plot<'a, DB: DrawingBackend>(&self, root: &'a DrawingArea<DB, Shift>) -> Result<ChartContext<'a, DB, Cartesian2d<RangedCoordusize, RangedCoordf32>>, DrawingAreaErrorKind<DB::ErrorType>> {
+    pub fn plot<'a, DB: DrawingBackend>(&self, root: &'a DrawingArea<DB, Shift>) ->
+        Result<
+            ChartContext<'a, DB, Cartesian2d<RangedCoordusize, RangedCoordf32>>,
+            DrawingAreaErrorKind<DB::ErrorType>
+        >
+    {
         self.history.borrow().plot(root)
     }
 }
