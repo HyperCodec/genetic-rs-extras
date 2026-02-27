@@ -2,8 +2,8 @@ use genetic_rs::prelude::*;
 #[cfg(feature = "plotters")]
 use genetic_rs_extras::plot::FitnessPlotter;
 
-const GENERATIONS: usize = 100;
-const POPULATION_SIZE: usize = 100;
+const GENERATIONS: usize = 500;
+const POPULATION_SIZE: usize = 500;
 const MUTATION_RATE: f32 = 0.1;
 const MUTATION_AMOUNT: f32 = 0.05;
 

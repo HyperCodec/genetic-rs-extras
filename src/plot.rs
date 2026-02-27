@@ -27,6 +27,8 @@ impl FitnessHistory {
             DrawingAreaErrorKind<DB::ErrorType>
         >
     {
+        root.fill(&WHITE)?;
+
         let max = self.highest.iter().cloned().fold(f32::NEG_INFINITY, f32::max);
         
         let mut chart = ChartBuilder::on(root)
@@ -36,28 +38,34 @@ impl FitnessHistory {
             .y_label_area_size(30)
             .build_cartesian_2d(0usize..self.highest.len(), 0f32..max)?;
         
-        chart.configure_mesh().draw()?;
+        chart.configure_mesh()
+            .x_desc("generation")
+            .y_desc("fitness")
+            .draw()?;
 
         chart
             .draw_series(LineSeries::new(
                 self.highest.iter().cloned().enumerate(),
                 GREEN,
             ))?
-            .label("highest");
+            .label("highest")
+            .legend(|(x,y)| Rectangle::new([(x - 5, y + 1), (x + 10, y)], GREEN));
 
         chart
             .draw_series(LineSeries::new(
                 self.median.iter().cloned().enumerate(),
                 YELLOW,
             ))?
-            .label("median");
+            .label("median")
+            .legend(|(x,y)| Rectangle::new([(x - 5, y + 1), (x + 10, y)], YELLOW));
 
         chart
             .draw_series(LineSeries::new(
                 self.lowest.iter().cloned().enumerate(),
                 RED,
             ))?
-            .label("lowest");
+            .label("lowest")
+            .legend(|(x,y)| Rectangle::new([(x - 5, y + 1), (x + 10, y)], RED));
 
         chart
             .configure_series_labels()
