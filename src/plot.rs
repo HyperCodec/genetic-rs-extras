@@ -77,7 +77,7 @@ impl FitnessHistory {
     }
 }
 
-/// A struct to hold the fitness history for all generations, which can be used for plotting.
+/// A struct implementing [`FitnessObserver`] that collects fitness values across generations and can plot them using the [`plotters`] crate.
 #[derive(Default, Debug, Clone)]
 pub struct FitnessPlotter {
     /// The fitness history for all generations, which gets updated in [`observe`][Self::observe].
