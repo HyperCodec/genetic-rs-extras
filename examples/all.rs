@@ -1,8 +1,10 @@
 use genetic_rs::prelude::*;
+#[cfg(feature = "indicatif")]
+use genetic_rs_extras::pb::ProgressObserver;
 #[cfg(feature = "plotters")]
 use genetic_rs_extras::plot::FitnessPlotter;
 
-const GENERATIONS: usize = 500;
+const GENERATIONS: usize = 1000;
 const POPULATION_SIZE: usize = 500;
 const MUTATION_RATE: f32 = 0.1;
 const MUTATION_AMOUNT: f32 = 0.05;
@@ -73,14 +75,18 @@ fn fitness(genome: &MyGenome) -> f32 {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut rng = rand::rng();
 
-    #[cfg(not(feature = "plotters"))]
-    let eliminator = FitnessEliminator::new_without_observer(fitness);
+    let observer = ();
+    
+    #[cfg(feature = "indicatif")]
+    let observer = observer.layer(ProgressObserver::new_with_default_style(GENERATIONS as u64));
 
     #[cfg(feature = "plotters")]
+    let observer = observer.layer(FitnessPlotter::new());
+
     let eliminator = FitnessEliminator::builder()
         .fitness_fn(fitness)
-        .observer(FitnessPlotter::new())
-        .build();
+        .observer(observer)
+        .build_or_panic();
 
     let mut sim = GeneticSim::new(
         Vec::gen_random(&mut rng, POPULATION_SIZE),
@@ -90,13 +96,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     sim.perform_generations(GENERATIONS);
 
+    #[cfg(feature = "indicatif")]
+    {
+        #[cfg(feature = "plotters")]
+        sim.eliminator.observer.0.1.finish();
+
+        #[cfg(not(feature = "plotters"))]
+        sim.eliminator.observer.1.finish();
+    }
+
     #[cfg(feature = "plotters")]
     {
         use plotters::prelude::{IntoDrawingArea, SVGBackend};
 
         let backend = SVGBackend::new(PLOT_PATH, (800, 600));
         let drawing_area = backend.into_drawing_area();
-        sim.eliminator.observer.plot(&drawing_area)?;
+        sim.eliminator.observer.1.plot(&drawing_area)?;
         drawing_area.present()?;
         println!("Fitness plot saved to {}", PLOT_PATH);
     }

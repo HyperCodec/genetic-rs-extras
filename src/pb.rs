@@ -69,14 +69,34 @@ impl ProgressObserver {
     /// Returns a default progress bar style that can be used with [`ProgressObserver`].
     pub fn default_style() -> ProgressStyle {
         ProgressStyle::default_bar()
-            .template("{bar:40.cyan/blue} {pos}/{len} {msg}")
+            .template("Elapsed: {elapsed} Gen: {pos}/{len} {msg} {bar:40.cyan/blue} (eta: {eta})")
             .unwrap()
             .tick_chars("#=>")
+    }
+
+    /// Finishes the progress bar. This should be called after the genetic algorithm has completed all generations to ensure that the progress bar is properly finalized.
+    pub fn finish(&self) {
+        self.0.finish();
+    }
+
+    /// Finishes the progress bar and clears it from the terminal. This can be useful if you want to clean up the output after the genetic algorithm has completed.
+    pub fn finish_and_clear(&self) {
+        self.0.finish_and_clear();
+    }
+
+    /// Creates a new [`ProgressObserver`] with the specified number of generations and the default progress bar style.
+    pub fn new_with_default_style(generations: u64) -> Self {
+        Self::new(generations, Self::default_style())
+    }
+
+    /// Creates a new [`ProgressObserver`] with the specified number of generations and the default progress bar style, and adds it to a [`MultiProgress`].
+    pub fn new_multi_with_default_style(generations: u64, multi: MultiProgress) -> Self {
+        Self::new_multi(generations, Self::default_style(), multi)
     }
 }
 
 impl<G> FitnessObserver<G> for ProgressObserver {
-    fn observe(&self, genomes: &[(G, f32)]) {
+    fn observe(&mut self, genomes: &[(G, f32)]) {
         self.0.inc(1);
 
         assert!(!genomes.is_empty(), "genomes should not be empty");
