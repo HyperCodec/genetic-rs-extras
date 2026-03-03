@@ -1,6 +1,9 @@
 use genetic_rs::prelude::*;
 use plotters::{coord::{Shift, types::{RangedCoordf32, RangedCoordusize}}, prelude::*};
 
+/// Simplified type alias for a Cartesian chart with the default coordinate types used in the examples. You can use this type alias when you don't need to customize the coordinate types, or when you want to use the default coordinate types for convenience.
+pub type CartesianChart<'a, DB> = ChartContext<'a, DB, Cartesian2d<RangedCoordusize, RangedCoordf32>>;
+
 /// A struct implementing [`FitnessObserver`] that collects fitness values across generations and can plot them using the [`plotters`] crate.
 #[derive(Default, Debug, Clone)]
 pub struct FitnessPlotter {
@@ -29,7 +32,7 @@ impl FitnessPlotter {
     /// This will plot the highest, median, and lowest fitness values for each generation.
     pub fn plot<'a, DB: DrawingBackend>(&self, root: &'a DrawingArea<DB, Shift>) ->
         Result<
-            ChartContext<'a, DB, Cartesian2d<RangedCoordusize, RangedCoordf32>>,
+            CartesianChart<'a, DB>,
             DrawingAreaErrorKind<DB::ErrorType>
         >
     {
@@ -75,8 +78,8 @@ impl FitnessPlotter {
 
         chart
             .configure_series_labels()
-            .background_style(&WHITE.mix(0.8))
-            .border_style(&BLACK)
+            .background_style(WHITE.mix(0.8))
+            .border_style(BLACK)
             .draw()?;
 
         Ok(chart)
