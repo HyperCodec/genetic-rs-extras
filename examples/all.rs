@@ -76,7 +76,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut rng = rand::rng();
 
     let observer = ();
-    
+
     #[cfg(feature = "indicatif")]
     let observer = observer.layer(ProgressObserver::new_with_default_style(GENERATIONS as u64));
 
