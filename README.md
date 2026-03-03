@@ -3,7 +3,7 @@
 
 This crate contains features that I thought were a bit too intrusive to include in the main `genetic-rs` crate, but are still useful for a lot of common projects. The current feature list is as follows:
 - `plotters` - Adds a `plot` module with the struct `FitnessPlotter`, which implements `FitnessObserver` and exposes a method to plot a chart on the given plotting backend.
-- `indicatif` - Adds a `pb` module, which adds both a `ProgressExt` trait to extend `GeneticSim` with a simple non-fitness-tracking progress bar, and a struct called `ProgressObserver` that displays fitness across generations.
+- `indicatif` - Adds a `pb` module, which adds both a `ProgressExt` trait to extend `GeneticSim` with a simple non-fitness-tracking progress bar, and a struct called `ProgressObserver` that displays the fitness values on a progress bar.
 
 ### How to Use
 In this guide, I'll assume you have at least basic knowledge of the `genetic-rs` framework. If not, you can find the docs [here](https://docs.rs/genetic-rs). This crate mostly just plugs into the existing `genetic-rs` ecosystem, so it can be used the same as any other crate in the ecosystem.
