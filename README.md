@@ -1,5 +1,5 @@
 # genetic-rs-extras
-![fitness graph](./assets/fitness.svg)
+![fitness graph](https://raw.githubusercontent.com/HyperCodec/genetic-rs-extras/main/assets/fitness.svg)
 
 This crate contains features that I thought were a bit too intrusive to include in the main `genetic-rs` crate, but are still useful for a lot of common projects. The current feature list is as follows:
 - `plotters` - Adds a `plot` module with the struct `FitnessPlotter`, which implements `FitnessObserver` and exposes a method to plot a chart on the given plotting backend.
