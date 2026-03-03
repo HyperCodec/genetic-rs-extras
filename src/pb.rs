@@ -1,7 +1,7 @@
 use genetic_rs::prelude::*;
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 
-/// This trait extends [`GeneticSim`][genetic_rs::GeneticSim] with variants of [`perform_generations`][genetic_rs::GeneticSim::perform_generations] that track the progress with a progress bar.
+/// This trait extends [`GeneticSim`] with variants of [`perform_generations`][genetic_rs::GeneticSim::perform_generations] that track the progress with a progress bar.
 /// Note that this implementation is generic, so it will not have access to things like fitness. Use [`ProgressObserver`] if you want to track progress with access to the population and fitness values.
 pub trait ProgressExt {
     /// Performs the specified number of generations while tracking the progress

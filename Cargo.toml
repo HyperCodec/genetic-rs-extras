@@ -2,6 +2,11 @@
 name = "genetic-rs-extras"
 version = "0.1.0"
 edition = "2024"
+authors = ["HyperCodec"]
+license = "MIT"
+description = "Extra utilities for genetic-rs, including plotting and progress bars."
+categories = ["simulation", "evolutionary-algorithms", "utilities"]
+keywords = ["genetic algorithms", "evolutionary computation", "plotting", "progress bars"]
 
 [package.metadata.docs.rs]
 all-features = true
