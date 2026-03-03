@@ -25,5 +25,8 @@ let mut sim = GeneticSim::new(...);
 let pb = sim.perform_generations_pb(100, ProgressStyle::default());
 ```
 
+### Feature Requests and Contributions
+Feature requests and PRs are welcome. The goal of this crate is to make using `genetic-rs` more convenient via features that aren't quite suitable for the main `genetic-rs` repo. For super complex features, I ask that you create your own separate crate that integrates with `genetic-rs`, but anything that is relatively simple to implement/maintain and offers meaningful convenience/eliminates boilerplate for the `genetic-rs` ecosystem can be added to this crate.
+
 ### License
 This crate falls under the `MIT` license.
