@@ -1,5 +1,6 @@
 # genetic-rs-extras
 ![fitness graph](./assets/fitness.svg)
+
 This crate contains features that I thought were a bit too intrusive to include in the main `genetic-rs` crate, but are still useful for a lot of common projects. The current feature list is as follows:
 - `plotters` - Adds a `plot` module with the struct `FitnessPlotter`, which implements `FitnessObserver` and exposes a method to plot a chart on the given plotting backend.
 - `indicatif` - Adds a `pb` module, which adds both a `ProgressExt` trait to extend `GeneticSim` with a simple non-fitness-tracking progress bar, and a struct called `ProgressObserver` that displays fitness across generations.
