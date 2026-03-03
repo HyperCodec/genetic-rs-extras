@@ -9,7 +9,7 @@ This crate contains features that I thought were a bit too intrusive to include 
 In this guide, I'll assume you have at least basic knowledge of the `genetic-rs` framework. If not, you can find the docs [here](https://docs.rs/genetic-rs). This crate mostly just plugs into the existing `genetic-rs` ecosystem, so it can be used the same as any other crate in the ecosystem.
 
 For the observers (i.e. `ProgressObserver` and `FitnessPlotter`), you can add these to your `FitnessEliminator`:
-```rust
+```rust,ignore
 let cool_observer = ProgressObserver::new_with_default_style(100).layer(FitnessPlotter::default());
 let eliminator = FitnessEliminator::builder()
     .observer(cool_observer)
@@ -18,7 +18,7 @@ let eliminator = FitnessEliminator::builder()
 ```
 
 With things like `ProgressExt`, you can just import them and use the method added to `GeneticSim`:
-```rust
+```rust,ignore
 use genetic_rs_extras::pb::ProgressExt;
 
 let mut sim = GeneticSim::new(...);
