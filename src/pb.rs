@@ -6,7 +6,7 @@ use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 pub trait ProgressExt {
     /// Performs the specified number of generations while tracking the progress
     /// with a progress bar.
-    fn perform_generations_tracked(&mut self, generations: u64, style: ProgressStyle) -> ProgressBar;
+    fn perform_generations_pb(&mut self, generations: u64, style: ProgressStyle) -> ProgressBar;
 
     /// Performs the specified number of generations while tracking the progress
     /// with a progress bar that is part of a [`MultiProgress`].
@@ -19,7 +19,7 @@ where
     E: Eliminator<G>,
     R: Repopulator<G>,
 {
-    fn perform_generations_tracked(&mut self, generations: u64, style: ProgressStyle) -> ProgressBar {
+    fn perform_generations_pb(&mut self, generations: u64, style: ProgressStyle) -> ProgressBar {
         let pb = ProgressBar::new(generations);
         pb.set_style(style);
 
