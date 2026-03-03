@@ -5,8 +5,11 @@ edition = "2024"
 authors = ["HyperCodec"]
 license = "MIT"
 description = "Extra utilities for genetic-rs, including plotting and progress bars."
-categories = ["simulation", "evolutionary-algorithms", "utilities"]
-keywords = ["genetic-algorithms", "evolutionary-computation", "plotting", "progress-bars"]
+categories = ["simulation", "visualization", "algorithms"]
+keywords = ["genetic-algorithms", "evolution", "plotting", "progress-bars"]
+homepage = "https://github.com/HyperCodec/genetic-rs-extras"
+repository = "https://github.com/HyperCodec/genetic-rs-extras"
+documentation = "https://docs.rs/genetic-rs-extras"
 
 [package.metadata.docs.rs]
 all-features = true
