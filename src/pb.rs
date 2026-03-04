@@ -16,8 +16,8 @@ pub trait ProgressExt {
 impl<G, E, R> ProgressExt for GeneticSim<G, E, R>
 where 
     G: Sized,
-    E: Eliminator<G>,
-    R: Repopulator<G>,
+    E: FeatureBoundedEliminator<G>,
+    R: FeatureBoundedRepopulator<G>,
 {
     fn perform_generations_pb(&mut self, generations: u64, style: ProgressStyle) -> ProgressBar {
         let pb = ProgressBar::new(generations);
